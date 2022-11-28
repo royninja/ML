@@ -1,0 +1,31 @@
+<html>
+	<head>
+		<title>Experience vs Salary</title>
+		<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.5.2/dist/tf.min.js"></script>
+		
+	</head>
+	<body>
+		<form method="GET" align="center">
+			<p>Experience in Year</p>
+			<input type="number" id="exp" />
+			<input type="button" onclick="hit()" value="submit">
+		<br>
+		<p>Expected Salary: </p><p id="salary">0</p>
+		</form>
+<script>
+	async function hit(){
+		console.log("started");
+		const model = await tf.loadLayersModel('model.json');
+		var year = parseFloat((document.getElementById("exp").value));
+		const input = tf.tensor1d([year]);
+		const val = await model.predict(input);
+		var st_ret = val.toString();
+		var salary = parseFloat(st_ret.match(/[\d\.]+/));
+		//alert(salary);	
+		document.getElementById("salary").innerHTML = salary.toFixed(2);
+
+	}
+//hit();
+</script>
+	</body>
+</html>
