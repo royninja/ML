@@ -15,7 +15,7 @@
 <script>
 	async function hit(){
 		console.log("started");
-		const model = await tf.loadLayersModel('model.json');
+		const model = await tf.loadLayersModel('https://raw.githubusercontent.com/royninja/ML/main/Salary%20vs%20Experience%20(Linear%20Regression)/mnist-model/model.json');
 		var year = parseFloat((document.getElementById("exp").value));
 		const input = tf.tensor1d([year]);
 		const val = await model.predict(input);
